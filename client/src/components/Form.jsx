@@ -1,5 +1,5 @@
 import { AiOutlinePlus } from "react-icons/ai";
-
+const API="http://localhost:5000/todos"
 function Form({ setTodos }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -8,7 +8,7 @@ function Form({ setTodos }) {
     if (!value) return; // empty todo guard
 
     try {
-      const res = await fetch("/api/todos", {
+      const res = await fetch(`${API}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title: value }),

@@ -1,13 +1,13 @@
 datasource db {
-  provider = "postgresql"
-   url      = env("DATABASE_URL")
+  provider = "mysql"
+   url      = "mysql://root:2004@localhost:3306/todo_app"
 }
 
 generator client {
   provider = "prisma-client-js"
 }
 
-model Todo {
+model todo {
   id           String   @id @default(cuid())
   title        String
   is_completed Boolean  @default(false)

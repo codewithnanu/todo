@@ -7,7 +7,7 @@ import {
   AiOutlineEdit,
   AiOutlineDelete,
 } from "react-icons/ai";
-
+const API="http://localhost:5000/todos"
 
 function Item({ item, setTodos }) {
   const [editing, setEditing] = React.useState(false);
@@ -24,8 +24,8 @@ function Item({ item, setTodos }) {
     setEditing(false);
 
     try {
-      const res = await fetch(`/api/todos/${item.id}`, {
-        method: "PATCH",
+      const res = await fetch(`${API}/${item.id}`, {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title: editValue }),
       });
@@ -56,7 +56,7 @@ function Item({ item, setTodos }) {
   // Delete todo permanently
   const handleDelete = async () => {
     try {
-      await fetch(`/api/todos/${item.id}`, {
+      await fetch(`${API}/${item.id}`, {
         method: "DELETE",
       });
       setTodos((prev) => prev.filter((todo) => todo.id !== item.id));
@@ -68,7 +68,7 @@ function Item({ item, setTodos }) {
   // Toggle complete/incomplete
   const completeTodo = async () => {
     try {
-      const res = await fetch(`/api/todos/${item.id}`, {
+      const res = await fetch(`${API}/${item.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ is_completed: !item.is_completed }),
